@@ -23,16 +23,16 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('label' => 'Пароль'),
+                'second_options' => array('label' => 'Повторите пароль'),
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Пожалуйста, введите пароль',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Ваш пароль должен состоять из {{ limit }} символов',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
