@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Новое желание{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Создать новое Желание</h1>
+
+        {{ include('wish/_form.html.twig') }}
+
+        <a href="{{ path('wish_index') }}">Назад к списку</a>
+    </div>
+{% endblock %}

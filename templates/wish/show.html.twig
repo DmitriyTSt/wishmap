@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Желание{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Желание</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{{ wish.url }}"><img class="wish-show-image" src="{{ wish.image }}" alt="{{ wish.image }}"></a>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-3 font-weight-bold">Айди</div>
+                    <div class="col-md-9">{{ wish.id }}</div>
+                    <div class="col-md-3 font-weight-bold">Заголовок</div>
+                    <div class="col-md-9">{{ wish.title }}</div>
+                    <div class="col-md-3 font-weight-bold">Описание</div>
+                    <div class="col-md-9">{{ wish.description }}</div>
+                    <div class="col-md-3 font-weight-bold">Дата создания</div>
+                    <div class="col-md-9">{{ wish.createdAt|format_datetime(pattern='d MMMM yyyy, hh:mm', locale='ru') }}</div>
+                    <div class="col-md-3 font-weight-bold">Статус</div>
+                    <div class="col-md-9">{{ wish.status }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div><a href="{{ path('wish_index') }}">Назад к списку</a></div>
+                        <div><a href="{{ path('wish_edit', {'id': wish.id}) }}">Изменить</a></div>
+                    </div>
+                    <div class="col-6 d-flex flex-row-reverse">
+                        <div>{{ include('wish/_delete_form.html.twig') }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

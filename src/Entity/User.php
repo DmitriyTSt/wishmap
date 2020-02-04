@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +36,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Wish", mappedBy="user")
+     */
+    private $wishes;
+
+    public function __construct()
+    {
+        $this->wishes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -111,5 +123,36 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Wish[]
+     */
+    public function getWishes(): Collection
+    {
+        return $this->wishes;
+    }
+
+    public function addWish(Wish $wish): self
+    {
+        if (!$this->wishes->contains($wish)) {
+            $this->wishes[] = $wish;
+            $wish->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWish(Wish $wish): self
+    {
+        if ($this->wishes->contains($wish)) {
+            $this->wishes->removeElement($wish);
+            // set the owning side to null (unless already changed)
+            if ($wish->getUser() === $this) {
+                $wish->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
