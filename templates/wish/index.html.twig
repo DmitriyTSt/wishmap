@@ -6,6 +6,12 @@
     <div style="padding: 20px">
         <h1>Список желаний</h1>
 
+        <div class="col-sm-4 col-lg-2" style="padding: 0">
+        <a href="{{ path('wish_new') }}">
+            <button class="btn btn-primary btn-block">Создать</button>
+        </a>
+        </div>
+
         <table class="table table-responsive-list">
             <thead>
             <tr>
@@ -27,7 +33,7 @@
                     <td data-th="Описание">{{ wish.description }}</td>
                     <td data-th="Ссылка"><a href="{{ wish.url }}">Ссылка</a></td>
                     <td data-th="Картинка"><a href="{{ wish.image }}">Картинка</a></td>
-                    <td data-th="Дата создания">{{ wish.createdAt }}</td>
+                    <td data-th="Дата создания">{{ wish.createdAt|format_datetime(pattern='d MMMM yyyy, HH:mm', locale='ru') }}</td>
                     <td data-th="Статус">{{ wish.status }}</td>
                     <td data-th="Действия">
                         <a href="{{ path('wish_show', {'id': wish.id}) }}">Открыть</a>
@@ -41,9 +47,5 @@
             {% endfor %}
             </tbody>
         </table>
-
-        <a href="{{ path('wish_new') }}">
-            <button class="btn btn-primary">Создать</button>
-        </a>
     </div>
 {% endblock %}
