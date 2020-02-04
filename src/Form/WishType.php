@@ -15,8 +15,8 @@ class WishType extends AbstractType
         $builder
             ->add('title', TextType::class, ['label' => 'Заголовок'])
             ->add('description', TextType::class, ['label' => 'Описание'])
-            ->add('url', TextType::class, ['label' => 'Ссылка'])
-            ->add('image', TextType::class, ['label' => 'Картинка'])
+            ->add('url', TextType::class, ['label' => 'Ссылка', 'required' => false])
+            ->add('image', TextType::class, ['label' => 'Картинка', 'required' => false])
             ->add('status', TextType::class, ['label' => 'Статус'])
         ;
     }

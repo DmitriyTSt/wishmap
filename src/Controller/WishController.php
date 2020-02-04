@@ -21,7 +21,7 @@ class WishController extends AbstractController
     public function index(WishRepository $wishRepository): Response
     {
         return $this->render('wish/index.html.twig', [
-            'wishes' => $wishRepository->findAll(),
+            'wishes' => $wishRepository->findByUser($this->getUser()),
         ]);
     }
 

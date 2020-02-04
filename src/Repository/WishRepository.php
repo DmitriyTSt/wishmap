@@ -19,6 +19,11 @@ class WishRepository extends ServiceEntityRepository
         parent::__construct($registry, Wish::class);
     }
 
+    public function findByUser($user)
+    {
+        return $this->findBy(['user' => $user]);
+    }
+
     // /**
     //  * @return Wish[] Returns an array of Wish objects
     //  */

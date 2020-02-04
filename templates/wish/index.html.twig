@@ -3,10 +3,11 @@
 {% block title %}Wish index{% endblock %}
 
 {% block body %}
-    <h1>Список желаний</h1>
+    <div style="padding: 20px">
+        <h1>Список желаний</h1>
 
-    <table class="table">
-        <thead>
+        <table class="table table-responsive-list">
+            <thead>
             <tr>
                 <th>Айди</th>
                 <th>Заголовок</th>
@@ -17,29 +18,32 @@
                 <th>Статус</th>
                 <th>Действия</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for wish in wishes %}
-            <tr>
-                <td>{{ wish.id }}</td>
-                <td>{{ wish.title }}</td>
-                <td>{{ wish.description }}</td>
-                <td>{{ wish.url }}</td>
-                <td>{{ wish.image }}</td>
-                <td>{{ wish.createdAt }}</td>
-                <td>{{ wish.status }}</td>
-                <td>
-                    <a href="{{ path('wish_show', {'id': wish.id}) }}">Открыть</a>
-                    <a href="{{ path('wish_edit', {'id': wish.id}) }}">Изменить</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">Список пуст</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for wish in wishes %}
+                <tr>
+                    <td data-th="Айди">{{ wish.id }}</td>
+                    <td data-th="Заголовок">{{ wish.title }}</td>
+                    <td data-th="Описание">{{ wish.description }}</td>
+                    <td data-th="Ссылка"><a href="{{ wish.url }}">Ссылка</a></td>
+                    <td data-th="Картинка"><a href="{{ wish.image }}">Картинка</a></td>
+                    <td data-th="Дата создания">{{ wish.createdAt }}</td>
+                    <td data-th="Статус">{{ wish.status }}</td>
+                    <td data-th="Действия">
+                        <a href="{{ path('wish_show', {'id': wish.id}) }}">Открыть</a>
+                        <a href="{{ path('wish_edit', {'id': wish.id}) }}">Изменить</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Список пуст</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('wish_new') }}">Создать</a>
+        <a href="{{ path('wish_new') }}">
+            <button class="btn btn-primary">Создать</button>
+        </a>
+    </div>
 {% endblock %}
